@@ -1,0 +1,26 @@
+/* VERSIÓN BÁSICA - SIN ERRORES */
+
+/* Deshabilitar selección */
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Deshabilitar impresión */
+@media print {
+    body { display: none !important; }
+}
+
+/* Marca de agua */
+body::before {
+    content: 'Del Mar al Plato - Protegido';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 80px;
+    color: rgba(0, 119, 190, 0.05);
+    z-index: -1;
+    pointer-events: none;
+}
