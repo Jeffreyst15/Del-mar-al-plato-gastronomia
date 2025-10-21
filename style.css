@@ -737,6 +737,32 @@ h1, h2, h3, h4 {
     line-height: 1.6;
 }
 
+table {
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            border: 1px solid #d0d0d0;
+            padding: 10px 15px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #4472C4;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #e8f0ff;
+        }
+
 /* Footer */
 .footer {
     background: var(--dark-blue);
@@ -852,4 +878,5 @@ h1, h2, h3, h4 {
     .section-title {
         font-size: 2rem;
     }
+
 }
