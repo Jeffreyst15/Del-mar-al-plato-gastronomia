@@ -37,7 +37,7 @@ h1, h2, h3, h4 {
 
 /* Navegación */
 .navbar {
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
     background: rgba(0, 61, 92, 0.95);
@@ -880,3 +880,4 @@ table {
     }
 
 }
+
