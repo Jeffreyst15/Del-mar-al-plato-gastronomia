@@ -741,7 +741,7 @@ table {
             border-collapse: collapse;
             background-color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 200px;  /* Ancho de la tabla */
+            width: auto;  /* Ancho de la tabla */
             margin: 0 auto; /* Centra la tabla */
         }
         
@@ -883,6 +883,7 @@ table {
     }
 
 }
+
 
 
 
