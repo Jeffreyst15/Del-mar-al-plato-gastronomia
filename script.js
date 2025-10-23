@@ -50,33 +50,6 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observar elementos para animación
-const animateElements = document.querySelectorAll('.department-card, .conservation-card, .recipe-card, .interview-card, .timeline-item');
-animateElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// Efecto parallax en hero
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
-
 // Contador animado (para estadísticas si las agregas)
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
@@ -121,20 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-// Animación de olas en el hero
-function createWaveAnimation() {
-    const wave = document.querySelector('.wave');
-    if (wave) {
-        let position = 0;
-        setInterval(() => {
-            position += 0.5;
-            wave.style.backgroundPosition = `${position}px 0`;
-        }, 50);
-    }
-}
-
-createWaveAnimation();
 
 // Función para resaltar sección activa en navegación
 function highlightActiveSection() {
@@ -186,4 +145,5 @@ document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function() {
         this.src = 'https://via.placeholder.com/600x400?text=Imagen+no+disponible';
     });
+
 });
