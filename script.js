@@ -145,5 +145,118 @@ document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function() {
         this.src = 'https://via.placeholder.com/600x400?text=Imagen+no+disponible';
     });
-
 });
+
+// ============================================
+// SISTEMA DE TRADUCCIÓN - DROPDOWN
+// ============================================
+
+// Toggle del dropdown al hacer clic en el botón
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    
+    if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+    }
+});
+
+// Cerrar dropdown al hacer clic fuera
+window.addEventListener('click', function(e) {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if (dropdownMenu && !e.target.matches('.dropdown-btn')) {
+        if (dropdownMenu.classList.contains('show')) {
+            dropdownMenu.classList.remove('show');
+        }
+    }
+});
+
+// Función para cambiar idioma
+function changeLang(lang, text) {
+    // Actualizar el botón con el idioma seleccionado
+    document.getElementById('currentLang').innerHTML = text + ' ▼';
+    
+    // Ocultar todos los elementos
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        element.style.display = 'none';
+    });
+    
+    // Mostrar solo elementos del idioma seleccionado
+    document.querySelectorAll('[data-lang="' + lang + '"]').forEach(element => {
+        element.style.display = 'block';
+    });
+    
+    // Guardar preferencia en localStorage
+    localStorage.setItem('preferred-language', lang);
+    localStorage.setItem('preferred-language-text', text);
+    
+    // Cerrar el dropdown
+    document.getElementById('dropdownMenu').classList.remove('show');
+    
+    // Mostrar notificación
+    showLanguageNotification(text);
+}
+
+// Función para mostrar notificación de cambio de idioma
+function showLanguageNotification(langText) {
+    // Crear o usar notificación existente
+    let notification = document.getElementById('lang-notification');
+    
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'lang-notification';
+        notification.className = 'lang-notification';
+        document.body.appendChild(notification);
+    }
+    
+    notification.textContent = '🌐 Idioma cambiado a: ' + langText;
+    notification.style.display = 'block';
+    notification.style.animation = 'slideInRight 0.4s ease-out';
+    
+    // Ocultar después de 3 segundos
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.4s ease-out';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 400);
+    }, 3000);
+}
+
+// Cargar idioma guardado al iniciar la página
+window.addEventListener('DOMContentLoaded', function() {
+    const savedLanguage = localStorage.getItem('preferred-language');
+    const savedLanguageText = localStorage.getItem('preferred-language-text');
+    
+    if (savedLanguage) {
+        // Actualizar el botón
+        if (savedLanguageText) {
+            document.getElementById('currentLang').innerHTML = savedLanguageText + ' ▼';
+        }
+        
+        // Aplicar el idioma guardado
+        document.querySelectorAll('[data-lang]').forEach(element => {
+            element.style.display = 'none';
+        });
+        
+        document.querySelectorAll('[data-lang="' + savedLanguage + '"]').forEach(element => {
+            element.style.display = 'block';
+        });
+    } else {
+        // Si no hay idioma guardado, mostrar español por defecto
+        changeLang('es', '🇪🇸 Español');
+    }
+});
+
+// Cerrar dropdown con la tecla Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        if (dropdownMenu && dropdownMenu.classList.contains('show')) {
+            dropdownMenu.classList.remove('show');
+        }
+    }
+});
+
